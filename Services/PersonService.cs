@@ -22,19 +22,28 @@ namespace people_web_api.Services
         public Person Get(string id) =>
             _people.Find(x => x.Id == id).FirstOrDefault();
 
-        public Person Create(Person person)
+        public Person Create(Person item)
         {
-            _people.InsertOne(person);
-            return person;
+            _people.InsertOne(item);
+            return item;
         }
 
-        public void Update(string id, Person person) =>
-            _people.ReplaceOne(x => x.Id == id, person);
+        public void Update(string id, Person item)
+        {
+            var newPerson = new Person { Id = id };
+            if (item.Name != null)
+                newPerson.Name = item.Name;
+            if (item.Age != default)
+                newPerson.Age = item.Age;
+
+            _people.ReplaceOne(x => x.Id == id, newPerson);
+        }
+
 
         public void Remove(string id) =>
             _people.DeleteOne(x => x.Id == id);
 
-        public void Remove(Person person) =>
-            _people.DeleteOne(x => x.Id == person.Id);
+        public void Remove(Person item) =>
+            _people.DeleteOne(x => x.Id == item.Id);
     }
 }
