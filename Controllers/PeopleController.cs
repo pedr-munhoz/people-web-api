@@ -34,9 +34,9 @@ namespace people_web_api.Controllers
 
 
         [HttpPost]
-        public ActionResult<Person> Create(Person item)
+        public async Task<ActionResult<Person>> Create(Person item)
         {
-            _service.Create(item);
+            await _service.Create(item);
 
             return CreatedAtRoute("GetById", new { id = item.Id.ToString() }, item);
         }
@@ -49,7 +49,7 @@ namespace people_web_api.Controllers
             if (person == null)
                 return NotFound();
 
-            _service.Update(id, item);
+            await _service.Update(id, item);
 
             return NoContent();
         }
@@ -62,7 +62,7 @@ namespace people_web_api.Controllers
             if (person == null)
                 return NotFound();
 
-            _service.Remove(id);
+            await _service.Remove(id);
 
             return NoContent();
         }

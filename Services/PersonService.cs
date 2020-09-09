@@ -23,13 +23,13 @@ namespace people_web_api.Services
         public async Task<Person> Get(string id) =>
             await _people.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        public Person Create(Person item)
+        public async Task<Person> Create(Person item)
         {
-            _people.InsertOne(item);
+            await _people.InsertOneAsync(item);
             return item;
         }
 
-        public void Update(string id, Person item)
+        public async Task Update(string id, Person item)
         {
             var newPerson = new Person { Id = id };
             if (item.Name != null)
@@ -37,14 +37,14 @@ namespace people_web_api.Services
             if (item.Age != default)
                 newPerson.Age = item.Age;
 
-            _people.ReplaceOne(x => x.Id == id, newPerson);
+            await _people.ReplaceOneAsync(x => x.Id == id, newPerson);
         }
 
 
-        public void Remove(string id) =>
-            _people.DeleteOne(x => x.Id == id);
+        public async Task Remove(string id) =>
+            await _people.DeleteOneAsync(x => x.Id == id);
 
-        public void Remove(Person item) =>
-            _people.DeleteOne(x => x.Id == item.Id);
+        public async Task Remove(Person item) =>
+            await _people.DeleteOneAsync(x => x.Id == item.Id);
     }
 }
