@@ -14,17 +14,16 @@ namespace people_web_api.Services
         /// <summary>
         /// Collection containing the necessary data.
         /// </summary>
-        private readonly IMongoCollection<Person> _people;
+        private readonly INoSqlCollection<Person> _people;
 
         /// <summary>
         /// Contstructor: recieves a <paramref name="settings"/> object used 
         /// for gainning access to the client database and appropriate collection.
         /// </summary>
         /// <param name="settings">Object cointaing the fields necessary for accessing the DB.</param>
-        public PersonService(IDatabaseSettings settings)
+        public PersonService(INoSqlDatabaseFactory factory, IDatabaseSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var database = factory.Create(settings.ConnectionString);
 
             _people = database.GetCollection<Person>(settings.CollectionName);
         }
