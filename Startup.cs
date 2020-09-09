@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using people_web_api.Models;
+using people_web_api.Services;
 
 namespace people_web_api
 {
@@ -23,6 +24,8 @@ namespace people_web_api
             services.Configure<PeopleDatabaseSettings>(Configuration.GetSection(nameof(PeopleDatabaseSettings)));
 
             services.AddSingleton<IPeopleDatabaseSettings>(x => x.GetRequiredService<IOptions<PeopleDatabaseSettings>>().Value);
+
+            services.AddSingleton<PersonService>();
 
             services.AddControllers();
         }
