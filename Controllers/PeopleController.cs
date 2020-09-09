@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using people_web_api.Models;
 using people_web_api.Services;
@@ -17,13 +18,13 @@ namespace people_web_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Person>> Get() =>
-            _service.Get();
+        public async Task<ActionResult<List<Person>>> Get() =>
+            await _service.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetById")]
-        public ActionResult<Person> Get(string id)
+        public async Task<ActionResult<Person>> Get(string id)
         {
-            var person = _service.Get(id);
+            var person = await _service.Get(id);
 
             if (person == null)
                 return NotFound();
@@ -41,9 +42,9 @@ namespace people_web_api.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public ActionResult Update(string id, Person item)
+        public async Task<ActionResult> Update(string id, Person item)
         {
-            var person = _service.Get(id);
+            var person = await _service.Get(id);
 
             if (person == null)
                 return NotFound();
@@ -54,9 +55,9 @@ namespace people_web_api.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            var person = _service.Get(id);
+            var person = await _service.Get(id);
 
             if (person == null)
                 return NotFound();

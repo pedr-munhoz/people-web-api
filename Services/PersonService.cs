@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 using people_web_api.Models;
 
@@ -16,11 +17,11 @@ namespace people_web_api.Services
             _people = database.GetCollection<Person>(settings.CollectionName);
         }
 
-        public List<Person> Get() =>
-            _people.Find(x => true).ToList();
+        public async Task<List<Person>> Get() =>
+            await _people.Find(x => true).ToListAsync();
 
-        public Person Get(string id) =>
-            _people.Find(x => x.Id == id).FirstOrDefault();
+        public async Task<Person> Get(string id) =>
+            await _people.Find(x => x.Id == id).FirstOrDefaultAsync();
 
         public Person Create(Person item)
         {
