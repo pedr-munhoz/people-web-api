@@ -1,4 +1,4 @@
-namespace people_web_api.Models
+namespace people_web_api.Database
 {
     /// <summary>
     /// Interface containing the necessary attributes for a runtime database setup.

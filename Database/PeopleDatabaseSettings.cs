@@ -1,4 +1,4 @@
-namespace people_web_api.Models
+namespace people_web_api.Database
 {
     public class PeopleDatabaseSettings : IDatabaseSettings
     {

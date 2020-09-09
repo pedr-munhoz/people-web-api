@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using people_web_api.Database;
 using people_web_api.Models;
 
 namespace people_web_api.Services
