@@ -8,6 +8,12 @@ namespace people_web_api.Database.MongoDB
     public class MongoCollection<T> : INoSqlCollection<T>
     {
         private readonly IMongoCollection<T> _collection;
+
+        public MongoCollection(IMongoCollection<T> collection)
+        {
+            _collection = collection;
+        }
+
         public Task<DeleteResult> DeleteOneAsync(Expression<Func<T, bool>> filter)
             => _collection.DeleteOneAsync(filter);
 
