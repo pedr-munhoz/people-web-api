@@ -5,5 +5,9 @@
     <RootNamespace>people_web_api</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.11.1" />
+  </ItemGroup>
+
 
 </Project>
