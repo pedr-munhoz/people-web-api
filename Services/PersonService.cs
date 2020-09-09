@@ -20,7 +20,7 @@ namespace people_web_api.Services
         /// for gainning access to the client database and appropriate collection.
         /// </summary>
         /// <param name="settings">Object cointaing the fields necessary for accessing the DB.</param>
-        public PersonService(IPeopleDatabaseSettings settings)
+        public PersonService(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
