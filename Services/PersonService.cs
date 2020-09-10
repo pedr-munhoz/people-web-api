@@ -20,6 +20,7 @@ namespace people_web_api.Services
         /// Contstructor: recieves a <paramref name="settings"/> object used 
         /// for gainning access to the client database and appropriate collection.
         /// </summary>
+        /// <param name="factory">NoSQL Database factory.</param>
         /// <param name="settings">Object cointaing the fields necessary for accessing the DB.</param>
         public PersonService(INoSqlDatabaseFactory factory, IDatabaseSettings settings)
         {
