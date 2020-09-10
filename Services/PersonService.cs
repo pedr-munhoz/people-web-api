@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using people_web_api.Database;
 using people_web_api.Models;
 
 namespace people_web_api.Services
@@ -13,17 +14,17 @@ namespace people_web_api.Services
         /// <summary>
         /// Collection containing the necessary data.
         /// </summary>
-        private readonly IMongoCollection<Person> _people;
+        private readonly INoSqlCollection<Person> _people;
 
         /// <summary>
         /// Contstructor: recieves a <paramref name="settings"/> object used 
         /// for gainning access to the client database and appropriate collection.
         /// </summary>
+        /// <param name="factory">NoSQL Database factory.</param>
         /// <param name="settings">Object cointaing the fields necessary for accessing the DB.</param>
-        public PersonService(IDatabaseSettings settings)
+        public PersonService(INoSqlDatabaseFactory factory, IDatabaseSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var database = factory.Create(settings.ConnectionString, settings.DatabaseName);
 
             _people = database.GetCollection<Person>(settings.CollectionName);
         }
