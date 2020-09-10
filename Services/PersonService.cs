@@ -23,7 +23,7 @@ namespace people_web_api.Services
         /// <param name="settings">Object cointaing the fields necessary for accessing the DB.</param>
         public PersonService(INoSqlDatabaseFactory factory, IDatabaseSettings settings)
         {
-            var database = factory.Create(settings.ConnectionString);
+            var database = factory.Create(settings.ConnectionString, settings.DatabaseName);
 
             _people = database.GetCollection<Person>(settings.CollectionName);
         }

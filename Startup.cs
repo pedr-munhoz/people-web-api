@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using people_web_api.Database;
+using people_web_api.Database.MongoDB;
 using people_web_api.Models;
 using people_web_api.Services;
 
@@ -25,6 +26,8 @@ namespace people_web_api
             services.Configure<PeopleDatabaseSettings>(Configuration.GetSection(nameof(PeopleDatabaseSettings)));
 
             services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<PeopleDatabaseSettings>>().Value);
+
+            services.AddSingleton<INoSqlDatabaseFactory>(new MongoDatabaseFactory());
 
             services.AddSingleton<PersonService>();
 
