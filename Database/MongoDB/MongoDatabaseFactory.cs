@@ -9,7 +9,7 @@ namespace people_web_api.Database.MongoDB
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase(databaseName);
 
-            return new MongoDbConnection(database);
+            return new MongoDbConnection(database, databaseName);
         }
     }
 }
