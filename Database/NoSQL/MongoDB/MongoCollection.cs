@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace people_web_api.Database.MongoDB
+namespace people_web_api.Database.NoSQL.MongoDB
 {
     public class MongoCollection<T> : INoSqlCollection<T>
     {

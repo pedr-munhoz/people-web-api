@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using people_web_api.Models;
+using people_web_api.Models.NoSQL;
 using people_web_api.Services;
 
 namespace people_web_api.Controllers

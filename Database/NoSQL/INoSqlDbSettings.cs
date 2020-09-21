@@ -3,7 +3,7 @@ namespace people_web_api.Database
     /// <summary>
     /// Interface containing the necessary attributes for a runtime database setup.
     /// </summary>
-    public interface IDatabaseSettings
+    public interface INoSqlDbSettings
     {
         /// <summary>
         /// Connection string to determine the client.

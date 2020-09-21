@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using people_web_api.Database;
-using people_web_api.Models;
+using people_web_api.Models.NoSQL;
 
 namespace people_web_api.Services
 {
     /// <summary>
     /// Service class for interacting with the data contained on the MongoDB.
     /// </summary>
-    public class PersonService
+    public class PersonService : IPersonService
     {
         /// <summary>
         /// Collection containing the necessary data.
@@ -22,7 +22,7 @@ namespace people_web_api.Services
         /// </summary>
         /// <param name="factory">NoSQL Database factory.</param>
         /// <param name="settings">Object cointaing the fields necessary for accessing the DB.</param>
-        public PersonService(INoSqlDatabaseFactory factory, IDatabaseSettings settings)
+        public PersonService(INoSqlDatabaseFactory factory, INoSqlDbSettings settings)
         {
             var database = factory.Create(settings.ConnectionString, settings.DatabaseName);
 

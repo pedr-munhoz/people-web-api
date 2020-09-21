@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using people_web_api.Database;
-using people_web_api.Database.MongoDB;
+using people_web_api.Database.NoSQL.MongoDB;
+using people_web_api.Database.SQL;
 using people_web_api.Models;
 using people_web_api.Services;
 
@@ -25,11 +27,23 @@ namespace people_web_api
         {
             services.Configure<PeopleDatabaseSettings>(Configuration.GetSection(nameof(PeopleDatabaseSettings)));
 
-            services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<PeopleDatabaseSettings>>().Value);
+            services.Configure<UsersDatabaseSettings>(Configuration.GetSection(nameof(UsersDatabaseSettings)));
+
+            services.AddSingleton<INoSqlDbSettings>(x => x.GetRequiredService<IOptions<PeopleDatabaseSettings>>().Value);
+
+            services.AddSingleton<ISqlDbSettings>(x => x.GetRequiredService<IOptions<UsersDatabaseSettings>>().Value);
 
             services.AddSingleton<INoSqlDatabaseFactory>(new MongoDatabaseFactory());
 
+
+            var options = new DbContextOptionsBuilder<BaseDbContext>();
+            options.UseNpgsql(Configuration.GetSection("ConnectionStrings")["UsersDbContext"]);
+
+            services.AddSingleton<ServerDbContext>(new ServerDbContext(options.Options));
+
             services.AddSingleton<PersonService>();
+
+            services.AddSingleton<UserService>();
 
             services.AddControllers();
         }

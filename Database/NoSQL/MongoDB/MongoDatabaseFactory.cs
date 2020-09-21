@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace people_web_api.Database.MongoDB
+namespace people_web_api.Database.NoSQL.MongoDB
 {
     public class MongoDatabaseFactory : INoSqlDatabaseFactory
     {

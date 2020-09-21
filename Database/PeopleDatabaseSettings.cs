@@ -1,6 +1,6 @@
 namespace people_web_api.Database
 {
-    public class PeopleDatabaseSettings : IDatabaseSettings
+    public class PeopleDatabaseSettings : INoSqlDbSettings
     {
         public string CollectionName { get; set; }
         public string ConnectionString { get; set; }

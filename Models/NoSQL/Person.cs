@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace people_web_api.Models
+namespace people_web_api.Models.NoSQL
 {
     /// <summary>
     /// Gereric representation of a person, model compatible with MongoDB.
