@@ -20,5 +20,9 @@ namespace people_web_api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<User>>> Get() =>
             await _service.Get();
+
+        [HttpGet("{id}", Name = "GetUserById")]
+        public async Task<ActionResult<User>> Get(int id) =>
+            await _service.Get(id.ToString());
     }
 }

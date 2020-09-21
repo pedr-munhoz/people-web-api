@@ -21,7 +21,7 @@ namespace people_web_api.Controllers
         public async Task<ActionResult<List<Person>>> Get() =>
             await _service.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetById")]
+        [HttpGet("{id:length(24)}", Name = "GetPersonById")]
         public async Task<ActionResult<Person>> Get(string id)
         {
             var person = await _service.Get(id);
@@ -38,7 +38,7 @@ namespace people_web_api.Controllers
         {
             await _service.Create(item);
 
-            return CreatedAtRoute("GetById", new { id = item.Id.ToString() }, item);
+            return CreatedAtRoute("GetPersonById", new { id = item.Id.ToString() }, item);
         }
 
         [HttpPut("{id:length(24)}")]
