@@ -27,17 +27,13 @@ namespace people_web_api
         {
             services.Configure<PeopleDatabaseSettings>(Configuration.GetSection(nameof(PeopleDatabaseSettings)));
 
-            services.Configure<UsersDatabaseSettings>(Configuration.GetSection(nameof(UsersDatabaseSettings)));
-
             services.AddSingleton<INoSqlDbSettings>(x => x.GetRequiredService<IOptions<PeopleDatabaseSettings>>().Value);
-
-            services.AddSingleton<ISqlDbSettings>(x => x.GetRequiredService<IOptions<UsersDatabaseSettings>>().Value);
 
             services.AddSingleton<INoSqlDatabaseFactory>(new MongoDatabaseFactory());
 
 
             var options = new DbContextOptionsBuilder<BaseDbContext>();
-            options.UseNpgsql(Configuration.GetSection("ConnectionStrings")["UsersDbContext"]);
+            options.UseNpgsql(Configuration.GetSection("UsersDatabaseSettings")["ConnectionString"]);
 
             services.AddSingleton<ServerDbContext>(new ServerDbContext(options.Options));
 
